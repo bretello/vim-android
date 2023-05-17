@@ -730,7 +730,11 @@ function! s:vim_job(cmd) abort
   let s:chunks[l:ch] = ['']
   let s:files[l:ch] = l:gradleFile
   call s:startBuilding()
-  call job_start(a:cmd, l:options)
+
+  let l:wrappedCmd = ['/bin/bash', '-c', join(a:cmd)]
+  " call writefile(['calling job_start: '. join(l:wrappedCmd)], 'aledebug.txt', 'a')
+
+  call job_start(wrappedCmd, l:options)
 endfunction
 
 " Helper method to setup all gradle/android environments. This task must be
