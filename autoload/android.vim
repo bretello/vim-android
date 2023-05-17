@@ -1,18 +1,26 @@
 function! android#logi(msg)
   redraw
-  echomsg "vim-android: " . a:msg
+  echomsg 'vim-android: ' . a:msg
+  call android#notify(a:msg)
 endfunction
 
 function! android#logw(msg)
   echohl warningmsg
-  echo "vim-android: " . a:msg
+  echo 'vim-android: ' . a:msg
   echohl normal
+  call android#notify(a:msg)
 endfunction
 
 function! android#loge(msg)
   echohl errormsg
-  echo "vim-android: " . a:msg
+  echo 'vim-android: ' . a:msg
   echohl normal
+  call android#notify(a:msg)
+endfunction
+
+function! android#notify(msg)
+    " TODO: add arguments for urgency
+    call system('notify-send -a vim-android "' . a:msg . '"')
 endfunction
 
 function! android#glyph()
