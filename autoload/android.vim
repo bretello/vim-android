@@ -145,7 +145,7 @@ function! android#launch(mode)
 
     " Build the variants map to APK and id dictionaries
     for l:metadata_file in l:metadata_files
-      let l:metadata = json_decode(readfile(l:metadata_file))
+      let l:metadata = json_decode(join(readfile(l:metadata_file), "\n"))
       let l:name = l:metadata['variantName']
       let l:file = globpath(l:outputs . '/**', l:metadata['elements'][0]['outputFile'], 1, 0)
       let l:id   = l:metadata['applicationId']
